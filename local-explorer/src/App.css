@@ -14,8 +14,10 @@
 }
 
 .App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+  background: #24C6DC;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #514A9D, #24C6DC);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #514A9D, #24C6DC); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -28,6 +30,44 @@
   color: #61dafb;
 }
 
+.window {
+ height: 500px;
+ width: 50%;
+ background-color: #514A9D;
+ -webkit-box-shadow: 5px 5px 15px 5px #000000; 
+box-shadow: 5px 5px 15px 5px #000000;
+}
+
+.window p {
+}
+
+.inside-window {
+  background-color: #fff !important;
+  color: black;
+}
+
+.inside-window-2 {
+  background-color: black !important;
+  color: #fff;
+}
+
+ul {
+  list-style-type: none;
+  text-align: left;
+}
+
+input {
+  border: none;
+  width: 100%;
+}
+
+.page-button {
+  background-color: white !important;
+  border-radius: unset !important;
+}
+
+
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
@@ -36,3 +76,5 @@
     transform: rotate(360deg);
   }
 }
+
+
