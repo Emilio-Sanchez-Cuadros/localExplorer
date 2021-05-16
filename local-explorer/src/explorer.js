@@ -75,7 +75,7 @@ class Explorer extends React.Component {
                 <div className="container window p-5">
                     <div className="row mb-3 p-1">
                         <div className="col-12 inside-window">
-                            <input type="text" value={path.replace(/\//g, "%2F")} onChange={this.handleChange} onKeyPress={this.navigateToPath} ></input>
+                            <input type="text" value={path.replace(/%2F/g, "/")} onChange={this.handleChange} onKeyPress={this.navigateToPath} ></input>
                         </div>
                     </div>
                     <button class="btn mb-3" onClick={this.goBack}>Go to root</button>
