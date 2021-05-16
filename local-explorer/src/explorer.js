@@ -1,5 +1,4 @@
 import React from 'react';
-import Displayer from './displayer.js';
 import { Link } from 'react-router-dom';
 const URL = "http://localhost:3000/";
 
@@ -20,6 +19,7 @@ class Explorer extends React.Component {
         this.handleChange = this.handleChange.bind(this);
         this.navigateToPath = this.navigateToPath.bind(this);
         this.goToFolder = this.goToFolder.bind(this);
+        this.goBack = this.goBack.bind(this);
     }
 
     async getFiles() {
@@ -47,8 +47,12 @@ class Explorer extends React.Component {
 
     goToFolder(file) {
         const { path } = this.state;
-        this.setState({ path: path+file }, () => this.getFiles())
+        this.setState({ path: path+file+"%2F" }, () => this.getFiles())
         console.log(path+file)
+    }
+
+    goBack() {
+        this.setState({ path: "c:%2F" }, () => this.getFiles())
     }
 
     handleChange(event) {
@@ -77,17 +81,18 @@ class Explorer extends React.Component {
                             <input type="text" value={path.replace(/\//g, "%2F")} onChange={this.handleChange} onKeyPress={this.navigateToPath} ></input>
                         </div>
                     </div>
+                    <button class="btn mb-3" onClick={this.goBack}>Go to root</button>
                     <div className="inside-window-2 p-5">
                         <ul>
                             {files.slice(filesToShowPosition, filesToShowPosition + filesPerPage).map((file) => (
-                                file.includes('.') ? <li key={file}>{file}</li> : <a onClick={() => this.goToFolder(file)}><li key={file}><img src={folderIcon} style={{ width: '35px'}}></img>{file}</li></a>
+                                file.lastIndexOf('.') == 8 ? <li key={file}><img src={fileIcon} style={{ width: '35px'}}></img>{file}</li> : <a onClick={() => this.goToFolder(file)}><li key={file}><img src={folderIcon} style={{ width: '35px'}}></img>{file}</li></a>
                             ))}
                         </ul>
                     </div>
                     <div>
                         {[...Array(totalPages)].map((_, num) => (
                             <button
-                                className="btn mr-2 page-button mt-5"
+                                className="btn mr-2 mt-5"
                                 key={num}
                                 disabled={num + 1 === currentPage}
                                 onClick={() => this.setState({ currentPage: num + 1 })}

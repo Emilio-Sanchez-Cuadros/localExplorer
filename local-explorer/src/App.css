@@ -60,11 +60,13 @@ input {
 
 .btn {
   border-radius: unset !important;
+  background-color: none !important;
+  border: 1px solid #fff !important;
+  color: #fff !important;
 }
 
-.page-button {
-  background-color: white !important;
-  border-radius: unset !important;
+a {
+  cursor: pointer;
 }
 
 
