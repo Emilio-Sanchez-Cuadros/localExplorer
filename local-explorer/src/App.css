@@ -31,14 +31,11 @@
 }
 
 .window {
- height: 500px;
+ height: 50%;
  width: 50%;
  background-color: #514A9D;
  -webkit-box-shadow: 5px 5px 15px 5px #000000; 
 box-shadow: 5px 5px 15px 5px #000000;
-}
-
-.window p {
 }
 
 .inside-window {
@@ -59,6 +56,10 @@ ul {
 input {
   border: none;
   width: 100%;
+}
+
+.btn {
+  border-radius: unset !important;
 }
 
 .page-button {
