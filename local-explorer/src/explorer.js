@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 const URL = "http://localhost:3000/";
 
 
@@ -78,11 +77,11 @@ class Explorer extends React.Component {
                             <input type="text" value={path.replace(/%2F/g, "/")} onChange={this.handleChange} onKeyPress={this.navigateToPath} ></input>
                         </div>
                     </div>
-                    <button class="btn mb-3" onClick={this.goBack}>Go to root</button>
+                    <button className="btn mb-3" onClick={this.goBack}>Go to root</button>
                     <div className="inside-window-2 p-5">
                         <ul>
                             {files.slice(filesToShowPosition, filesToShowPosition + filesPerPage).map((file) => (
-                                file.lastIndexOf('.') == 8 ? <li key={file}><img src={fileIcon} style={{ width: '35px'}}></img>{file}</li> : <a onClick={() => this.goToFolder(file)}><li key={file}><img src={folderIcon} style={{ width: '35px'}}></img>{file}</li></a>
+                                file.lastIndexOf('.') === 8 ? <li key={file}><img src={fileIcon} alt="file" style={{ width: '35px'}}></img>{file}</li> : <a key={file} onClick={() => this.goToFolder(file)}><li key={file}><img src={folderIcon} alt="folder" style={{ width: '35px'}}></img>{file}</li></a>
                             ))}
                         </ul>
                     </div>
