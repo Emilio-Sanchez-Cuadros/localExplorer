@@ -36,6 +36,7 @@ class Explorer extends React.Component {
     navigateToPath(event) {
         const { path } = this.state;
         if (event.key === 'Enter') {
+            path.replace(/\//g, "%2F");
             console.log(path);
             this.setState({ path: event.target.value }, () => this.getFiles());
         }
@@ -81,7 +82,9 @@ class Explorer extends React.Component {
                     <div className="inside-window-2 p-5">
                         <ul>
                             {files.slice(filesToShowPosition, filesToShowPosition + filesPerPage).map((file) => (
-                                file.lastIndexOf('.') === 8 ? <li key={file}><img src={fileIcon} alt="file" style={{ width: '35px'}}></img>{file}</li> : <a key={file} onClick={() => this.goToFolder(file)}><li key={file}><img src={folderIcon} alt="folder" style={{ width: '35px'}}></img>{file}</li></a>
+                                file.split('.').length == 2 ? 
+                                <li key={file}><img src={fileIcon} alt="file" style={{ width: '35px'}}></img>{file}</li> : 
+                                <a key={file} onClick={() => this.goToFolder(file)}><li key={file}><img src={folderIcon} alt="folder" style={{ width: '35px'}}></img>{file}</li></a>
                             ))}
                         </ul>
                     </div>
