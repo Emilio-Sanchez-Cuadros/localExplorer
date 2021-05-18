@@ -27,7 +27,6 @@ server.get("/:path", (req, res) => {
       console.log(err);
     else {
       res.send(files);
-      // res.json({files});      
       console.log(files);
     }
   }) 

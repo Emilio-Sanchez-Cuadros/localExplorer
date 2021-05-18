@@ -20,6 +20,7 @@ class Explorer extends React.Component {
         this.goToFolder = this.goToFolder.bind(this);
         this.goBack = this.goBack.bind(this);
         this.handleClick = this.handleClick.bind(this);
+        this.levelUp = this.levelUp.bind(this);
     }
 
     async getFiles() {
@@ -63,7 +64,7 @@ class Explorer extends React.Component {
     }
 
     goBack() {
-        this.setState({ path: "c:%2F" }, () => this.getFiles())
+        this.setState({ path: "c:%2F", currentPage: 1 }, () => this.getFiles())
     }
 
     handleClick(event) {
@@ -72,6 +73,16 @@ class Explorer extends React.Component {
         });
       }
 
+    levelUp() {
+        const { path } = this.state;
+        const lastLevel = path.split('%2F')[2].length;
+        console.log(lastLevel);
+        const index = path.lastIndexOf('%2F', lastLevel);
+        console.log(index);
+        path = path.substring(0, path.length() - index);
+        console.log(path);
+        this.setState({ path: path, currentPage: 1 }, () => this.getFiles())
+    }
 
     handleChange(event) {
         const { path } = this.state;
@@ -107,6 +118,7 @@ class Explorer extends React.Component {
                             <input type="text" value={path.replace(/%2F/g, "/")} onChange={this.handleChange} onKeyPress={this.navigateToPath} ></input>
                         </div>
                     </div>
+                    <button className="btn mb-3 mr-3" onClick={this.levelUp}>Go up</button>
                     <button className="btn mb-3" onClick={this.goBack}>Go to root</button>
                     <div className="inside-window-2 p-5">
                         <ul>
