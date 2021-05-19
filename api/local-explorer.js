@@ -1,9 +1,7 @@
 const fs = require('fs');
 const express = require("express");
-// const { json } = require('body-parser');
 const server = express();
-var cors = require('cors')
-// var router = express.Router();
+var cors = require('cors');
 
 
 server.get("/:path", (req, res) => {
@@ -18,7 +16,7 @@ server.get("/:path", (req, res) => {
   } else if (path.search('Usuarios')) {
     path = path.replace('Usuarios', 'Users')
   } else if (path.search('Archivos comunes')) {
-    path = path.replace('Archivos comunes', 'Common Files')
+    path = path.replace(/Archivos comunes/g, 'Common Files')
   }
 
   try {
@@ -34,8 +32,6 @@ server.get("/:path", (req, res) => {
     res.sendStatus(400);
   }
 });
-
-
 
 
 server.listen(3000);

@@ -7,8 +7,8 @@ class Explorer extends React.Component {
         super(props);
         this.state = {
             files: [],
-            path2: ['c:%2F'],
             path: 'c:%2F',
+            isRoot: false,
             currentPage: 1,
             filesPerPage: 5,
             folderIcon: "https://img.icons8.com/emoji/452/open-file-folder-emoji.png",
@@ -18,7 +18,7 @@ class Explorer extends React.Component {
         this.handleChange = this.handleChange.bind(this);
         this.navigateToPath = this.navigateToPath.bind(this);
         this.goToFolder = this.goToFolder.bind(this);
-        this.goBack = this.goBack.bind(this);
+        this.goToRoot = this.goToRoot.bind(this);
         this.handleClick = this.handleClick.bind(this);
         this.levelUp = this.levelUp.bind(this);
     }
@@ -47,23 +47,11 @@ class Explorer extends React.Component {
     goToFolder(file) {
         const { path, path2 } = this.state;
         console.log(path);
-        this.setState({ path: path+file+"%2F" }, () => this.getFiles())
+        this.setState({ path: path+"%2F"+file }, () => this.getFiles())
         this.setState({ path2: path2 }, () => this.getFiles())
     }
 
-    goToFolder2(file) {
-        const { path2 } = this.state;
-        path2.push(file);
-        // this.setState({ path2: path2+"%2F" }, () => this.getFiles())
-        console.log(path2+"%2F");
-        const newPath = path2+"%2F";
-        const pathStringified = newPath.toString();
-        const pathNoComma = pathStringified.replaceAll(",", "");
-        console.log(pathNoComma);
-        this.setState({ path2: pathNoComma }, () => this.getFiles())
-    }
-
-    goBack() {
+    goToRoot() {
         this.setState({ path: "c:%2F", currentPage: 1 }, () => this.getFiles())
     }
 
@@ -75,13 +63,15 @@ class Explorer extends React.Component {
 
     levelUp() {
         const { path } = this.state;
-        const lastLevel = path.split('%2F')[2].length;
-        console.log(lastLevel);
-        const index = path.lastIndexOf('%2F', lastLevel);
-        console.log(index);
-        path = path.substring(0, path.length() - index);
         console.log(path);
-        this.setState({ path: path, currentPage: 1 }, () => this.getFiles())
+        // const lastLevel = path.split('%2F').length;
+        // console.log(lastLevel);
+        const index = path.lastIndexOf('%2F');
+        console.log(index);
+        const upPath = path.substring(index,0);
+        console.log(upPath);
+        this.setState({ path: upPath, currentPage: 1 }, () => this.getFiles())
+
     }
 
     handleChange(event) {
@@ -103,10 +93,14 @@ class Explorer extends React.Component {
 
     render() {
         const { currentPage, files, filesPerPage, folderIcon, fileIcon, path } = this.state;
+        let { isRoot } = this.state;
         const indexOfLastFile = currentPage * filesPerPage;
         const indexOfFirstFile = indexOfLastFile - filesPerPage;
         const currentFiles = files.slice(indexOfFirstFile, indexOfLastFile);
         const pageNumbers = [];
+        if (path == 'c:%2F') {
+            isRoot = true;
+        }
         for (let i = 1; i <= Math.ceil(files.length / filesPerPage); i++) {
             pageNumbers.push(i);
           }
@@ -118,8 +112,8 @@ class Explorer extends React.Component {
                             <input type="text" value={path.replace(/%2F/g, "/")} onChange={this.handleChange} onKeyPress={this.navigateToPath} ></input>
                         </div>
                     </div>
-                    <button className="btn mb-3 mr-3" onClick={this.levelUp}>Go up</button>
-                    <button className="btn mb-3" onClick={this.goBack}>Go to root</button>
+                    <button disabled={isRoot} className="btn mb-3 mr-3" onClick={this.levelUp}>Go up</button>
+                    <button className="btn mb-3" onClick={this.goToRoot}>Go to root</button>
                     <div className="inside-window-2 p-5">
                         <ul>
                             {currentFiles.map((file) => (
