@@ -117,7 +117,7 @@ class Explorer extends React.Component {
                     <div className="inside-window-2 p-5">
                         <ul>
                             {currentFiles.map((file) => (
-                                file.split('.').length == 2 || file.includes('.tmp') ? 
+                                file.split('.').length == 2 || file.includes('.tmp') || file.includes('.exe') ? 
                                 <li key={file}><img src={fileIcon} alt="file" style={{ width: '35px'}}></img>{file}</li> : 
                                 <a key={file} onClick={() => this.goToFolder(file)}><li key={file}><img src={folderIcon} alt="folder" style={{ width: '35px'}}></img>{file}</li></a>
                             ))}
