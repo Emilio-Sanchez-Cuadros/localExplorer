@@ -55,7 +55,7 @@ class Explorer extends React.Component {
 
     goToFolder(file) {
         const { path } = this.state;
-        this.setState({ path: path+"%2F"+file }, () => this.getFiles())
+        this.setState({ path: path+"%2F"+file, currentPage: 1 }, () => this.getFiles())
     }
 
     handleChange(event) {
