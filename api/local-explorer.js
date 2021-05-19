@@ -25,7 +25,6 @@ server.get("/:path", (req, res) => {
       console.log(err);
     else {
       res.send(files);
-      console.log(files);
     }
   }) 
   } catch {

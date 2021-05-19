@@ -32,21 +32,18 @@ class Explorer extends React.Component {
         });
         const files = await response.json();
         this.setState({ files });
-        console.log(files)
     }
 
 
     navigateToPath(event) {
         const { path } = this.state;
         if (event.key === 'Enter') {
-            console.log(path);
             this.setState({ path: event.target.value.replace(/\//g, "%2F") }, () => this.getFiles());
         }
     }
 
     goToFolder(file) {
         const { path, path2 } = this.state;
-        console.log(path);
         this.setState({ path: path+"%2F"+file }, () => this.getFiles())
         this.setState({ path2: path2 }, () => this.getFiles())
     }
@@ -63,13 +60,8 @@ class Explorer extends React.Component {
 
     levelUp() {
         const { path } = this.state;
-        console.log(path);
-        // const lastLevel = path.split('%2F').length;
-        // console.log(lastLevel);
         const index = path.lastIndexOf('%2F');
-        console.log(index);
         const upPath = path.substring(index,0);
-        console.log(upPath);
         this.setState({ path: upPath, currentPage: 1 }, () => this.getFiles())
 
     }
@@ -78,7 +70,6 @@ class Explorer extends React.Component {
         const { path } = this.state;
         path.replace(/\//g, "%2F");
         this.setState({ path: event.target.value });
-        console.log(path)
     }
 
     componentDidMount() {
