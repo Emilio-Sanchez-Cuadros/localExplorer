@@ -58,7 +58,7 @@ class Displayer extends React.Component {
                             </button>
                         ))}
                     </div>
-                    </>
+            </>
         )
 
     }

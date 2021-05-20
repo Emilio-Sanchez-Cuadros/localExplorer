@@ -77,7 +77,6 @@ class Explorer extends React.Component {
             isRoot = true;
         }
             return (
-            <>
                 <div className="container window p-5">
                     <div className="row mb-3 p-1">
                         <div className="col-12 inside-window">
@@ -88,7 +87,6 @@ class Explorer extends React.Component {
                     <button className="btn mb-3" onClick={this.goToRoot}>Go to root</button>
                     <Displayer files={files} goToFolder={this.goToFolder} />
                 </div>
-            </>
         )
 
     }
