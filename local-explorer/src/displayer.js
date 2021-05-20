@@ -23,7 +23,7 @@ class Displayer extends React.Component {
 
       componentDidUpdate(prevProps) {
         if (this.props.files !== prevProps.files) {
-            this.setState({ files: this.state.files });
+            this.setState({ files: this.props.files });
         }
     }
 
