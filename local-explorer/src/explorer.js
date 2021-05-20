@@ -20,12 +20,6 @@ class Explorer extends React.Component {
 
     }
 
-    navigateToPath(event) {
-        if (event.key === 'Enter') {
-            this.setState({ path: event.target.value.replace(/\//g, "%2F") }, () => this.getFiles());
-        }
-    }
-
     async getFiles() {
         const { path } = this.state;
         const response = await fetch(`${URL}${path}`, {
@@ -38,13 +32,19 @@ class Explorer extends React.Component {
         console.log(files);
     }
 
+    //Function for access path by typing it using the upper bar
+    navigateToPath(event) {
+        if (event.key === 'Enter') {
+            this.setState({ path: event.target.value.replace(/\//g, "%2F") }, () => this.getFiles());
+        }
+    }
 
-
+    //Function for navigate to root
     goToRoot() {
         this.setState({ path: "c:%2F", currentPage: 1 }, () => this.getFiles())
     }
 
-
+    //Function for navigate back up
     levelUp() {
         const { path } = this.state;
         const index = path.lastIndexOf('%2F');
@@ -53,6 +53,7 @@ class Explorer extends React.Component {
 
     }
 
+    //Function for clicking on the path
     goToFolder(file) {
         const { path } = this.state;
         this.setState({ path: path+"%2F"+file, currentPage: 1 }, () => this.getFiles())
@@ -60,15 +61,14 @@ class Explorer extends React.Component {
 
     handleChange(event) {
         const { path } = this.state;
+        let pathOnChange = event.target.value; 
         path.replace(/\//g, "%2F");
-        this.setState({ path: event.target.value });
+        this.setState({ path: pathOnChange });
     }
 
     componentDidMount() {
         this.getFiles()
     }
-
-
 
     render() {
         const { files, path } = this.state;

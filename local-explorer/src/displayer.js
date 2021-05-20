@@ -11,11 +11,11 @@ class Displayer extends React.Component {
 
         };
 
-        this.handleClick = this.handleClick.bind(this);
-
     }
 
-    handleClick(event) {
+    // I've used the binding just to be consistent on my code since I started creating functions like that, 
+    // but this way is cleaner
+    handleClick = (event) => {
         this.setState({
           currentPage: Number(event.target.id)
         });

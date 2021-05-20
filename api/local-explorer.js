@@ -14,8 +14,6 @@ server.get("/:path", (req, res) => {
     path = path.replace('Archivos de programa', 'Program Files')
   } else if (path.search('Usuarios')) {
     path = path.replace('Usuarios', 'Users')
-  } else if (path.search('Archivos comunes')) {
-    path = path.replace(/Archivos comunes/g, 'Common Files')
   }
 
   try {
