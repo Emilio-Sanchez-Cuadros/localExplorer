@@ -21,12 +21,6 @@ class Displayer extends React.Component {
         });
       }
 
-      componentDidUpdate(prevProps) {
-        if (this.props.files !== prevProps.files) {
-            this.setState({ files: this.props.files });
-        }
-    }
-
     render() {
         const { files } = this.props
         const { fileIcon, folderIcon, currentPage, filesPerPage } = this.state;
