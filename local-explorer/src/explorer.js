@@ -1,5 +1,5 @@
 import React from 'react';
-import Displayer from './displayer'
+import Displayer from './displayer';
 const URL = "http://localhost:3000/";
 
 
